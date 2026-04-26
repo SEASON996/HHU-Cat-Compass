@@ -137,3 +137,43 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# 依赖
+node_modules/
+npm-debug.log*
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 运行时
+logs/
+*.log
+pids/
+*.pid
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 小程序
+dist/
+
+# 如果 .vs 已经被 Git 追踪，先移除
+git rm -r --cached .vs
+
+# 确保 .gitignore 包含以下内容
+echo ".vs/" >> .gitignore
+echo "CopilotIndices/" >> .gitignore
+
+# 提交 .gitignore 的更改
+git add .gitignore
+git commit -m "Ignore VS cache directories"
+/.vs
