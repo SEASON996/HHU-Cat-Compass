@@ -137,3 +137,32 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# 依赖
+node_modules/
+npm-debug.log*
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 运行时
+logs/
+*.log
+pids/
+*.pid
+
+# IDE
+.idea/
+.vscode/
+.vs/                    
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 小程序
+dist/
