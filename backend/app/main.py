@@ -1,7 +1,9 @@
 # app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import cats, users, records
+from fastapi.staticfiles import StaticFiles 
+from app.routers import cats, users, records, upload
+import os
 
 app = FastAPI(
     title="河海猫咪地图 API",
@@ -22,11 +24,14 @@ app.add_middleware(
 app.include_router(cats.router)
 app.include_router(users.router)
 app.include_router(records.router)
+app.include_router(upload.router) 
+
+# 挂载静态文件目录（让上传的图片可以被访问）
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
 
 @app.get("/")
 def root():
     return {"message": "河海猫咪地图 API 服务运行中"}
-
-@app.get("/health")
-def health_check():
-    return {"status": "healthy"}
