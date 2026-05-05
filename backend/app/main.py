@@ -3,6 +3,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles 
 from app.routers import cats, users, records, upload
+from app.routers import auth as auth_router
+from app.config import settings
+
 import os
 
 app = FastAPI(
@@ -25,11 +28,14 @@ app.include_router(cats.router)
 app.include_router(users.router)
 app.include_router(records.router)
 app.include_router(upload.router) 
+app.include_router(auth_router.router)  # 注册认证路由
 
 # 挂载静态文件目录（让上传的图片可以被访问）
 UPLOAD_DIR = "uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+# 确保上传目录存在
+os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+# 挂载静态文件目录
+app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
 
 @app.get("/")

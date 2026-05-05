@@ -21,7 +21,7 @@ def create_record(
         raise HTTPException(status_code=404, detail=f"猫咪 '{record.cat_id}' 不存在")
     
     # 验证用户是否存在
-    user = user_service.get_user_by_student_id(db, str(record.user_id))
+    user = user_service.get_user_by_id(db, str(record.user_id))
     if not user:
         raise HTTPException(status_code=404, detail=f"用户不存在")
     

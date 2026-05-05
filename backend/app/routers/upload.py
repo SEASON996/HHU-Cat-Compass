@@ -41,7 +41,7 @@ async def upload_image(file: UploadFile = File(...)) -> Dict:
             detail=f"图片大小不能超过 5MB，当前: {file_size / 1024 / 1024:.2f}MB"
         )
     
-    # 3. 生成唯一文件名（避免重名）
+    # 3. 生成唯一文件名
     unique_filename = f"{uuid.uuid4().hex}{file_extension}"
     file_path = os.path.join(UPLOAD_DIR, unique_filename)
     
